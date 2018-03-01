@@ -48,5 +48,15 @@ export default [
       { file: `${dir}${pkg.name}.es.js`, format: 'es', banner: banner }
     ],
     plugins: plugins
+  },
+  {
+    input: 'src/polyfills.ts',
+    output: {
+      name: 'polyfills',
+      file: `${dir}polyfills.min.js`,
+      format: 'iife',
+      sourcemap: true
+    },
+    plugins: [...plugins, uglify()]
   }
 ]

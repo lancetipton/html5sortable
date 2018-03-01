@@ -8,7 +8,7 @@
 * Only 2KB (minified and gzipped).
 * Built using native HTML5 drag and drop API. No dependencies.
 * Supports both list and grid style layouts.
-* Supported Browsers: Current versions of all major browsers (Chrome, Firefox, Safari, Opera, Edge), IE11+
+* Supported Browsers: Current versions of all major browsers (Chrome, Firefox, Safari, Opera, Edge), [IE11+ (Polyfill required)](#Polyfills)
 * Available as ES6 Module, AMD, CommonJS and iffe with `sortable` global
 
 **Demo:** Check out the **[examples](http://lukasoppermann.github.io/html5sortable/index.html)**
@@ -272,6 +272,17 @@ The plugin has limited support for sorting table rows. To sort table rows:
 This version is maintained by [Lukas Oppermann](https://github.com/lukasoppermann) and [many other contributors](../../contributors). Thanks for your help! :+1:
 
 Contributions are always welcome. Please check out the [contribution guidelines](CONTRIBUTING.md) to make it fast & easy for us to merge your PR.
+
+## Polyfills
+This projects has a polyfill approach to browser compatibility for old browser. This means that we use current features that are supported in the main group of browsers that are supported. However, some of those features are not supported in IE11, so there is a `polyfills.min.js` file to use if IE11 is still a thing for you. Just include it before the sortable and you should be alright.
+
+```
+<script src="./html5sortable/dist/polyfills.min.js"></script>
+```
+
+This file currently addresses the following missing features:
+- `element.matches(selector)`
+- `element.remove()`
 
 ## Known Issues
 ### Firefox

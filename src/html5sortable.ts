@@ -1,6 +1,5 @@
 'use strict'
 
-import _matches from './matches'
 import { addData as _data, removeData as _removeData } from './data'
 import _filter from './filter'
 import { addEventListener as _on, removeEventListener as _off } from './eventListener'
@@ -137,7 +136,7 @@ var _listsConnected = function (curList, destList) {
   var acceptFrom = _data(curList, 'opts').acceptFrom
   if (acceptFrom !== null) {
     return acceptFrom !== false && acceptFrom.split(',').filter(function (sel) {
-      return sel.length > 0 && _matches(destList, sel)
+      return sel.length > 0 && destList.matches(sel)
     }).length > 0
   }
   if (curList === destList) {
@@ -387,7 +386,7 @@ export default function sortable (sortableElements, options) {
     // Handle drag events on draggable items
     _on(items, 'dragstart', function (e) {
       e.stopImmediatePropagation()
-      if ((options.handle && !_matches(e.target, options.handle)) || this.getAttribute('draggable') === 'false') {
+      if ((options.handle && !e.target.matches(options.handle)) || this.getAttribute('draggable') === 'false') {
         return
       }
 
