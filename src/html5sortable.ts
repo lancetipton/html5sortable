@@ -8,7 +8,6 @@ import { addAttribute as _attr, removeAttribute as _removeAttr } from './attribu
 import _offset from './offset'
 import _debounce from './debounce'
 import _index from './index'
-import _detach from './removeElement'
 import {makeElement as _html2element, insertBefore as _before, insertAfter as _after} from './insertHtmlElements'
 /*
  * variables global to the plugin
@@ -422,13 +421,13 @@ export default function sortable (sortableElements, options) {
       _attr(dragging, 'aria-grabbed', 'false')
 
       if (dragging.getAttribute('aria-copied') === 'true' && _data(dragging, 'dropped') !== 'true') {
-        _detach(dragging)
+        dragging.remove()
       }
 
       dragging.style.display = dragging.oldDisplay
       delete dragging.oldDisplay
 
-      placeholderMap.forEach(_detach)
+      placeholderMap.forEach((element) => element.remove())
       newParent = this.parentElement
 
       if (_listsConnected(newParent, startParent)) {
@@ -513,11 +512,11 @@ export default function sortable (sortableElements, options) {
         // Intentionally violated chaining, it is more complex otherwise
         Array.from(placeholderMap.values())
           .filter(function (element) { return element !== placeholder })
-          .forEach(_detach)
+          .forEach((element) => element.remove())
       } else {
         if (Array.from(placeholderMap.values()).indexOf(element) === -1 &&
             !_filter(_getChildren(element), options.items).length) {
-          placeholderMap.forEach(_detach)
+          placeholderMap.forEach((element) => element.remove())
           element.appendChild(placeholder)
         }
       }
